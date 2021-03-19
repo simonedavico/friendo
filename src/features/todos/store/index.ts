@@ -1,6 +1,10 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Todo } from '../types';
-import { deleteTodoThunk, fetchTodosThunk } from './thunks';
+import {
+  deleteTodoThunk,
+  fetchTodosThunk,
+  markTodoAsCompletedThunk,
+} from './thunks';
 
 export const todosAdapter = createEntityAdapter<Todo>();
 
@@ -30,13 +34,23 @@ const todosSlice = createSlice({
       .addCase(fetchTodosThunk.rejected, (state) => {
         state.loading = false;
       })
-      // optimistic deletion
       .addCase(deleteTodoThunk.pending, (state, action) => {
         todosAdapter.removeOne(state, action.meta.arg.id);
       })
-      // revert optimistic deletion
       .addCase(deleteTodoThunk.rejected, (state, action) => {
         todosAdapter.addOne(state, action.meta.arg);
+      })
+      .addCase(markTodoAsCompletedThunk.pending, (state, action) => {
+        todosAdapter.updateOne(state, {
+          id: action.meta.arg.id,
+          changes: { completed: true },
+        });
+      })
+      .addCase(markTodoAsCompletedThunk.rejected, (state, action) => {
+        todosAdapter.updateOne(state, {
+          id: action.meta.arg.id,
+          changes: { completed: false },
+        });
       });
   },
 });

@@ -2,6 +2,8 @@ import { Todo } from './types';
 
 export const deleteTodo = async (_todo: Todo) => {};
 
+export const completeTodo = async (todo: Todo) => todo;
+
 export const fetchTodos = async (): Promise<Todo[]> => [
   {
     userId: 1,

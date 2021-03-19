@@ -4,7 +4,10 @@ import * as React from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import { spacing, typography } from '../../design';
 import { selectForFriend } from '../../features/todos/store/selectors';
-import { deleteTodoThunk } from '../../features/todos/store/thunks';
+import {
+  deleteTodoThunk,
+  markTodoAsCompletedThunk,
+} from '../../features/todos/store/thunks';
 import { Todo } from '../../features/todos/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FriendsWithTodosStackParamList } from './types';
@@ -27,12 +30,21 @@ interface TodosForFriendScreenProps {
 interface TodoListItemProps {
   todo: Todo;
   onDelete: (todo: Todo) => void;
+  onComplete: (todo: Todo) => void;
 }
 
-const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onDelete }) => {
+const TodoListItem: React.FC<TodoListItemProps> = ({
+  todo,
+  onDelete,
+  onComplete,
+}) => {
   return (
     <View style={styles.todosListItem}>
-      <Text style={styles.todoTitle}>{todo.title}</Text>
+      <View style={styles.todoTitle}>
+        <Text>{todo.title}</Text>
+        <Text>{todo.completed ? 'Done' : 'Todo'}</Text>
+      </View>
+      <Button onPress={() => onComplete(todo)} title="Done" />
       <Button onPress={() => onDelete(todo)} title="Delete" />
     </View>
   );
@@ -49,6 +61,10 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
     dispatch(deleteTodoThunk(todo));
   };
 
+  const completeTodo = (todo: Todo) => {
+    dispatch(markTodoAsCompletedThunk(todo));
+  };
+
   return (
     <FlatList
       ListHeaderComponent={() => (
@@ -57,7 +73,11 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
       data={todos}
       keyExtractor={({ id }) => `${id}`}
       renderItem={({ item }) => (
-        <TodoListItem todo={item} onDelete={deleteTodo} />
+        <TodoListItem
+          todo={item}
+          onDelete={deleteTodo}
+          onComplete={completeTodo}
+        />
       )}
     />
   );
