@@ -70,6 +70,10 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   );
 };
 
+export const navigationOptions = {
+  title: 'Friends',
+};
+
 const styles = StyleSheet.create({
   header: {
     fontSize: typography.text50,

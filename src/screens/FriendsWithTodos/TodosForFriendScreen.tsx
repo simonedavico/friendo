@@ -83,6 +83,10 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
   );
 };
 
+export const navigationOptions = {
+  headerTitle: () => null,
+};
+
 const styles = StyleSheet.create({
   header: {
     fontSize: typography.text50,
