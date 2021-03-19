@@ -91,7 +91,6 @@
 				E5A85203AD27A1DCECD4D93B /* Pods-friendo-friendoTests.debug.xcconfig */,
 				E8BA23BDBFCE8A7558BE8494 /* Pods-friendo-friendoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

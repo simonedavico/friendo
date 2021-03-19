@@ -12,6 +12,8 @@ target 'friendo' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-flipper', :path => '../node_modules/react-native-flipper', :configuration => 'Debug'
+
   target 'friendoTests' do
     inherit! :complete
     # Pods for testing
