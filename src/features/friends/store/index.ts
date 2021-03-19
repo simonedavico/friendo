@@ -1,20 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Friend } from '../types';
 import { fetchFriendsThunk } from './thunks';
 
-type FriendsState = {
-  ids: number[];
-  byId: Record<number, Friend>;
+const friendsAdapter = createEntityAdapter<Friend>();
+
+const initialState = friendsAdapter.getInitialState<{
   loading: boolean;
   error: string | null;
-};
-
-const initialState: FriendsState = {
-  ids: [],
-  byId: {},
+}>({
   loading: false,
   error: null,
-};
+});
 
 const friendsSlice = createSlice({
   name: 'friends',
@@ -25,10 +21,9 @@ const friendsSlice = createSlice({
       .addCase(fetchFriendsThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchFriendsThunk.fulfilled, (state) => {
+      .addCase(fetchFriendsThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.byId = {};
-        state.ids = [];
+        friendsAdapter.setAll(state, action.payload);
       })
       .addCase(fetchFriendsThunk.rejected, (state) => {
         state.loading = false;
