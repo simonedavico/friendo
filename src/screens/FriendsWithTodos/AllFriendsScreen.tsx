@@ -62,6 +62,7 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
       ListHeaderComponent={() => <Text style={styles.header}>Friends</Text>}
       data={Object.values(friends)}
       keyExtractor={(friend) => `${friend!.id}`}
+      initialNumToRender={20}
       renderItem={({ item }) => (
         <FriendListItem friend={item!} onPress={onFriendPress} />
       )}

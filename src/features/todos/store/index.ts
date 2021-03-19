@@ -2,7 +2,7 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Todo } from '../types';
 import { fetchTodosThunk } from './thunks';
 
-const todosAdapter = createEntityAdapter<Todo>();
+export const todosAdapter = createEntityAdapter<Todo>();
 
 const initialState = todosAdapter.getInitialState<{
   loading: boolean;
