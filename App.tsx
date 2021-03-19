@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { SafeAreaView, StatusBar, Text, useColorScheme } from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Provider } from 'react-redux';
 import AllFriendsScreen from './src/features/friends/screens/AllFriendsScreen';
@@ -14,13 +19,18 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <SafeAreaView style={backgroundStyle}>
+      <SafeAreaView style={[backgroundStyle, styles.safeArea]}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Text>Helo?</Text>
         <AllFriendsScreen />
       </SafeAreaView>
     </Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+});
 
 export default App;
