@@ -6,7 +6,8 @@ import {
 import * as React from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import AddTodoModal from '../../components/AddTodoModal';
-import { spacing, typography } from '../../design';
+import Title from '../../components/Title';
+import { spacing } from '../../design';
 import { selectForFriend } from '../../features/todos/store/selectors';
 import {
   addTodoThunk,
@@ -90,7 +91,7 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
     <>
       <FlatList
         ListHeaderComponent={() => (
-          <Text style={styles.header}>Todos for friend</Text>
+          <Title style={styles.header}>Todos for friend</Title>
         )}
         data={todos}
         keyExtractor={({ id }) => `${id}`}
@@ -121,7 +122,6 @@ export const navigationOptions: StackNavigationOptions = {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: typography.text50,
     paddingVertical: spacing.s3,
     paddingHorizontal: spacing.s2,
   },

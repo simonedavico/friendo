@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { spacing, typography } from '../../design';
+import { spacing } from '../../design';
 import { fetchFriendsThunk } from '../../features/friends/store/thunks';
 import { Friend } from '../../features/friends/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FriendsWithTodosStackParamList } from './types';
 import { fetchTodosThunk } from '../../features/todos/store/thunks';
+import Title from '../../components/Title';
 
 interface FriendListItemProps {
   friend: Friend;
@@ -59,7 +60,7 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
     <ActivityIndicator animating />
   ) : (
     <FlatList
-      ListHeaderComponent={() => <Text style={styles.header}>Friends</Text>}
+      ListHeaderComponent={() => <Title style={styles.header}>Friends</Title>}
       data={Object.values(friends)}
       keyExtractor={(friend) => `${friend!.id}`}
       initialNumToRender={20}
@@ -76,7 +77,6 @@ export const navigationOptions = {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: typography.text50,
     paddingVertical: spacing.s3,
     paddingHorizontal: spacing.s2,
   },
