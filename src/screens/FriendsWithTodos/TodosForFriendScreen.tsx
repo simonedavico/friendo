@@ -1,7 +1,11 @@
 import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import {
+  StackNavigationOptions,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 import * as React from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import AddTodoModal from '../../components/AddTodoModal';
 import { spacing, typography } from '../../design';
 import { selectForFriend } from '../../features/todos/store/selectors';
 import {
@@ -51,11 +55,10 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
 };
 
 const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
+  navigation,
   route,
 }) => {
   const friendId = route.params.friendId;
-  const dispatch = useAppDispatch();
-  const todos = useAppSelector(selectForFriend(friendId));
 
   const deleteTodo = (todo: Todo) => {
     dispatch(deleteTodoThunk(todo));
@@ -65,25 +68,50 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
     dispatch(markTodoAsCompletedThunk(todo));
   };
 
-  return (
-    <FlatList
-      ListHeaderComponent={() => (
-        <Text style={styles.header}>Todos for friend</Text>
-      )}
-      data={todos}
-      keyExtractor={({ id }) => `${id}`}
-      renderItem={({ item }) => (
-        <TodoListItem
-          todo={item}
-          onDelete={deleteTodo}
-          onComplete={completeTodo}
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector(selectForFriend(friendId));
+  const [showAddTodo, setShowAddTodo] = React.useState(false);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          title="Add Todo"
+          onPress={() => {
+            setShowAddTodo(true);
+          }}
         />
-      )}
-    />
+      ),
+    });
+  }, [navigation]);
+
+  return (
+    <>
+      <FlatList
+        ListHeaderComponent={() => (
+          <Text style={styles.header}>Todos for friend</Text>
+        )}
+        data={todos}
+        keyExtractor={({ id }) => `${id}`}
+        renderItem={({ item }) => (
+          <TodoListItem
+            todo={item}
+            onDelete={deleteTodo}
+            onComplete={completeTodo}
+          />
+        )}
+      />
+      <AddTodoModal
+        isVisible={showAddTodo}
+        onModalHide={() => {
+          setShowAddTodo(false);
+        }}
+      />
+    </>
   );
 };
 
-export const navigationOptions = {
+export const navigationOptions: StackNavigationOptions = {
   headerTitle: () => null,
 };
 
