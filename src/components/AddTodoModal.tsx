@@ -7,6 +7,7 @@ import { radius, spacing, typography } from '../design';
 interface AddTodoModalProps {
   isVisible: boolean;
   onModalHide: () => void;
+  onSave: (todo: string) => Promise<unknown>;
 }
 
 const animationDuration = 800;
@@ -14,6 +15,7 @@ const animationDuration = 800;
 const AddTodoModal: React.FC<AddTodoModalProps> = ({
   isVisible,
   onModalHide,
+  onSave,
 }) => {
   const textInputRef = React.useRef<TextInput>(null);
   const [newTodo, setNewTodo] = React.useState('');
@@ -67,7 +69,9 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({
           <TouchableOpacity
             disabled={!newTodo.trim()}
             style={styles.button}
-            onPress={() => {}}>
+            onPress={() => {
+              onSave(newTodo).then(onModalHide);
+            }}>
             <Text>Save</Text>
           </TouchableOpacity>
         </View>

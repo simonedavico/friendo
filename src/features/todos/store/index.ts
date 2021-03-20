@@ -1,6 +1,9 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Todo } from '../types';
 import {
+  addTodoFulfilled,
+  addTodoPending,
+  addTodoRejected,
   deleteTodoThunk,
   fetchTodosThunk,
   markTodoAsCompletedThunk,
@@ -51,6 +54,20 @@ const todosSlice = createSlice({
           id: action.meta.arg.id,
           changes: { completed: false },
         });
+      })
+      .addCase(addTodoPending, (state, action) => {
+        todosAdapter.upsertOne(state, action.payload);
+      })
+      // TODO: tempId should be in action meta, not payload
+      .addCase(addTodoFulfilled, (state, action) => {
+        const { tempId, newTodo } = action.payload;
+        todosAdapter.updateOne(state, {
+          id: tempId,
+          changes: { id: newTodo.id },
+        });
+      })
+      .addCase(addTodoRejected, (state, action) => {
+        todosAdapter.removeOne(state, action.payload.tempId);
       });
   },
 });

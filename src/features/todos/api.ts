@@ -4,6 +4,22 @@ export const deleteTodo = async (_todo: Todo) => {};
 
 export const completeTodo = async (todo: Todo) => todo;
 
+// N.B: we should not pass the id, but it should be returned from the server
+export const addTodo = async ({
+  id,
+  friendId,
+  todoText,
+}: {
+  id: number;
+  friendId: number;
+  todoText: string;
+}) => ({
+  userId: friendId,
+  id,
+  title: todoText,
+  completed: false,
+});
+
 export const fetchTodos = async (): Promise<Todo[]> => [
   {
     userId: 1,

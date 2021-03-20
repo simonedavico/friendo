@@ -9,6 +9,7 @@ import AddTodoModal from '../../components/AddTodoModal';
 import { spacing, typography } from '../../design';
 import { selectForFriend } from '../../features/todos/store/selectors';
 import {
+  addTodoThunk,
   deleteTodoThunk,
   markTodoAsCompletedThunk,
 } from '../../features/todos/store/thunks';
@@ -105,6 +106,9 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
         isVisible={showAddTodo}
         onModalHide={() => {
           setShowAddTodo(false);
+        }}
+        onSave={async (todoText) => {
+          dispatch(addTodoThunk({ todoText, friendId }));
         }}
       />
     </>
