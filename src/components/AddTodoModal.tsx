@@ -50,6 +50,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({
           returnKeyType="done"
           placeholder="New todo..."
           placeholderTextColor="black"
+          onChangeText={(text) => setNewTodo(text)}
           // FIXME: there is some bug that prevents TouchableOpacity
           // from being clickable after blur occurs, find out why
           blurOnSubmit
