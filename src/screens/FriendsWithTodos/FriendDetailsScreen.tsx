@@ -4,7 +4,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import * as React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Linking, StyleSheet, Text, View } from 'react-native';
 import AddTodoModal from '../../components/AddTodoModal';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
@@ -103,7 +103,11 @@ const FriendDetailsScreen: React.FC<FriendDetailsScreen> = ({ route }) => {
                 style={styles.button}>
                 <Text>Add Todo</Text>
               </Button>
-              <Button style={styles.button}>
+              <Button
+                onPress={() => {
+                  Linking.openURL(`tel:${friend.phone}`);
+                }}
+                style={styles.button}>
                 <Text>Call</Text>
               </Button>
               <Button>
