@@ -22,9 +22,7 @@ const initialState = todosAdapter.getInitialState<{
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
-  reducers: {
-    deleteTodo: todosAdapter.removeOne,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodosThunk.pending, (state) => {

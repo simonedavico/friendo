@@ -10,8 +10,8 @@ export type Friend = {
     city: string;
     zipcode: string;
     geo: {
-      lat: string;
-      lng: string;
+      lat: number;
+      lng: number;
     };
   };
   phone: string;
@@ -22,3 +22,5 @@ export type Friend = {
     bs: string;
   };
 };
+
+export type FriendWithDistance = Friend & { distanceInKm?: number };

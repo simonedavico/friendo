@@ -2,7 +2,7 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Friend } from '../types';
 import { fetchFriendsThunk } from './thunks';
 
-const friendsAdapter = createEntityAdapter<Friend>();
+export const friendsAdapter = createEntityAdapter<Friend>();
 
 const initialState = friendsAdapter.getInitialState<{
   loading: boolean;

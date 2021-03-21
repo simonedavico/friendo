@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { Provider } from 'react-redux';
-import FriendsWithTodos from './src/screens/FriendsWithTodos';
-import store from './src/store';
+import FriendsWithTodos from './screens/FriendsWithTodos';
+import store from './store';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

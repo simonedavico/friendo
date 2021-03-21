@@ -7,16 +7,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { spacing } from '../../design';
+import { selectFriends } from '../../features/friends/store/selectors';
 import { fetchFriendsThunk } from '../../features/friends/store/thunks';
-import { Friend } from '../../features/friends/types';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { FriendsWithTodosStackParamList } from './types';
+import { Friend, FriendWithDistance } from '../../features/friends/types';
+import { geolocationThunk } from '../../features/geolocation/store/thunks';
 import { fetchTodosThunk } from '../../features/todos/store/thunks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Title from '../../components/Title';
+import { spacing } from '../../design';
+import intl from '../../intl';
+import { FriendsWithTodosStackParamList } from './types';
 
 interface FriendListItemProps {
-  friend: Friend;
+  friend: FriendWithDistance;
   onPress: (friend: Friend) => void;
 }
 
@@ -35,14 +38,23 @@ const FriendListItem: React.FC<FriendListItemProps> = ({ friend, onPress }) => {
       style={styles.friendListItem}
       onPress={() => onPress(friend)}>
       <Text>{friend.name}</Text>
+      {friend.distanceInKm !== undefined ? (
+        <Text>
+          is {intl.formatNumber(friend.distanceInKm, { unit: 'kilometers' })}{' '}
+          away
+        </Text>
+      ) : null}
     </TouchableOpacity>
   );
 };
 
 const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((state) => state.friends.loading);
-  const friends = useAppSelector((state) => state.friends.entities);
+  const isLoadingFriends = useAppSelector((state) => state.friends.loading);
+  const isLoadingGeolocation = useAppSelector(
+    (state) => state.geolocation.loading,
+  );
+  const friends = useAppSelector(selectFriends);
 
   const onFriendPress = React.useCallback(
     (friend: Friend) => {
@@ -52,11 +64,12 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   );
 
   React.useEffect(() => {
+    dispatch(geolocationThunk());
     dispatch(fetchFriendsThunk());
     dispatch(fetchTodosThunk());
   }, [dispatch]);
 
-  return isLoading ? (
+  return isLoadingFriends || isLoadingGeolocation ? (
     <ActivityIndicator animating />
   ) : (
     <FlatList
