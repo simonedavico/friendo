@@ -20,19 +20,19 @@ import { Todo } from '../../features/todos/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FriendsWithTodosStackParamList } from './types';
 
-type TodosForFriendScreenNavigationProp = StackNavigationProp<
+type FriendDetailsScreenNavigationProp = StackNavigationProp<
   FriendsWithTodosStackParamList,
   'TodosForFriend'
 >;
 
-type TodosForFriendScreenRouteProp = RouteProp<
+type FriendDetailsScreenRouteProp = RouteProp<
   FriendsWithTodosStackParamList,
   'TodosForFriend'
 >;
 
-interface TodosForFriendScreenProps {
-  navigation: TodosForFriendScreenNavigationProp;
-  route: TodosForFriendScreenRouteProp;
+interface FriendDetailsScreen {
+  navigation: FriendDetailsScreenNavigationProp;
+  route: FriendDetailsScreenRouteProp;
 }
 
 interface TodoListItemProps {
@@ -62,9 +62,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
   );
 };
 
-const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
-  route,
-}) => {
+const FriendDetailsScreen: React.FC<FriendDetailsScreen> = ({ route }) => {
   const friendId = route.params.friendId;
   const friend = useAppSelector((state) => selectById(state, friendId));
   const todos = useAppSelector(selectForFriend(friendId));
@@ -163,4 +161,4 @@ const styles = StyleSheet.create({
   todoTitle: { flex: 1 },
 });
 
-export default TodosForFriendScreen;
+export default FriendDetailsScreen;

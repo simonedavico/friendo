@@ -3,9 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AllFriendsScreen, {
   navigationOptions as friendsNavOptions,
 } from './AllFriendsScreen';
-import TodosForFriendScreen, {
+import FriendDetailsScreen, {
   navigationOptions as todosNavOptions,
-} from './TodosForFriendScreen';
+} from './FriendDetailsScreen';
 import { FriendsWithTodosStackParamList } from './types';
 
 const Stack = createStackNavigator<FriendsWithTodosStackParamList>();
@@ -20,7 +20,7 @@ const FriendsWithTodos: React.FC = () => {
       />
       <Stack.Screen
         name="TodosForFriend"
-        component={TodosForFriendScreen}
+        component={FriendDetailsScreen}
         options={todosNavOptions}
       />
     </Stack.Navigator>
