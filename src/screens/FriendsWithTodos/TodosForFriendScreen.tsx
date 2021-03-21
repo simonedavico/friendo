@@ -4,10 +4,12 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import * as React from 'react';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import AddTodoModal from '../../components/AddTodoModal';
+import Button from '../../components/Button';
 import Title from '../../components/Title';
 import { spacing } from '../../design';
+import { selectById } from '../../features/friends/store/selectors';
 import { selectForFriend } from '../../features/todos/store/selectors';
 import {
   addTodoThunk,
@@ -50,17 +52,24 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
         <Text>{todo.title}</Text>
         <Text>{todo.completed ? 'Done' : 'Todo'}</Text>
       </View>
-      <Button onPress={() => onComplete(todo)} title="Done" />
-      <Button onPress={() => onDelete(todo)} title="Delete" />
+      <Button onPress={() => onComplete(todo)}>
+        <Text>Done</Text>
+      </Button>
+      <Button onPress={() => onDelete(todo)}>
+        <Text>Delete</Text>
+      </Button>
     </View>
   );
 };
 
 const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
-  navigation,
   route,
 }) => {
   const friendId = route.params.friendId;
+  const friend = useAppSelector((state) => selectById(state, friendId));
+  const todos = useAppSelector(selectForFriend(friendId));
+  const [showAddTodo, setShowAddTodo] = React.useState(false);
+  const dispatch = useAppDispatch();
 
   const deleteTodo = (todo: Todo) => {
     dispatch(deleteTodoThunk(todo));
@@ -70,28 +79,40 @@ const TodosForFriendScreen: React.FC<TodosForFriendScreenProps> = ({
     dispatch(markTodoAsCompletedThunk(todo));
   };
 
-  const dispatch = useAppDispatch();
-  const todos = useAppSelector(selectForFriend(friendId));
-  const [showAddTodo, setShowAddTodo] = React.useState(false);
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button
-          title="Add Todo"
-          onPress={() => {
-            setShowAddTodo(true);
-          }}
-        />
-      ),
-    });
-  }, [navigation]);
+  if (!friend) {
+    return (
+      // TODO: style
+      <View>
+        <Text>Whoops, friend not found!</Text>
+      </View>
+    );
+  }
 
   return (
     <>
       <FlatList
         ListHeaderComponent={() => (
-          <Title style={styles.header}>Todos for friend</Title>
+          <View>
+            <Title style={styles.header}>{friend.name}</Title>
+            <Text style={{ paddingHorizontal: spacing.s2 }}>
+              {friend.address.city}, {friend.address.street}
+            </Text>
+            <View style={styles.headerButtons}>
+              <Button
+                onPress={() => {
+                  setShowAddTodo(true);
+                }}
+                style={styles.button}>
+                <Text>Add Todo</Text>
+              </Button>
+              <Button style={styles.button}>
+                <Text>Call</Text>
+              </Button>
+              <Button>
+                <Text>Maps</Text>
+              </Button>
+            </View>
+          </View>
         )}
         data={todos}
         keyExtractor={({ id }) => `${id}`}
@@ -121,9 +142,16 @@ export const navigationOptions: StackNavigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  button: {
+    marginRight: spacing.s2,
+  },
   header: {
     paddingVertical: spacing.s3,
     paddingHorizontal: spacing.s2,
+  },
+  headerButtons: {
+    flexDirection: 'row',
+    margin: spacing.s2,
   },
   todosListItem: {
     alignItems: 'center',

@@ -5,7 +5,7 @@ import { selectGeolocation } from '../../geolocation/selectors';
 import { friendsAdapter } from '.';
 import { FriendWithDistance } from '../types';
 
-const { selectAll } = friendsAdapter.getSelectors<AppState>(
+const { selectAll, selectById } = friendsAdapter.getSelectors<AppState>(
   (state) => state.friends,
 );
 
@@ -31,3 +31,5 @@ export const selectFriends = createSelector(
       : friends;
   },
 );
+
+export { selectById };

@@ -20,7 +20,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({ friend, onPress }) => {
         {friend.distanceInKm !== undefined ? (
           <Text>
             is {intl.formatNumber(friend.distanceInKm, { unit: 'kilometers' })}{' '}
-            away
+            km away
           </Text>
         ) : null}
       </View>
