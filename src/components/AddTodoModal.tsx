@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import { radius, spacing } from '../design';
+import Button from './Button';
 import Title from './Title';
 
 interface AddTodoModalProps {
@@ -56,15 +57,17 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({
           blurOnSubmit
         />
         <View style={styles.buttons}>
-          <TouchableOpacity
+          <Button
             style={styles.button}
             onPress={() => {
               setTimeout(() => setNewTodo(''), animationDuration);
               onModalHide();
             }}>
             <Text>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Button>
+          {/* TODO: this should be a proper Spacer component */}
+          <View style={{ width: spacing.s2 }} />
+          <Button
             disabled={!isValid()}
             style={styles.button}
             onPress={() => {
@@ -72,7 +75,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({
               onModalHide();
             }}>
             <Text>Save</Text>
-          </TouchableOpacity>
+          </Button>
         </View>
       </View>
     </Modal>
@@ -99,10 +102,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.s2,
   },
   button: {
-    borderWidth: 1,
     flex: 1,
-    paddingHorizontal: spacing.s3,
-    paddingVertical: spacing.s4,
   },
   buttons: {
     flexDirection: 'row',
