@@ -8,7 +8,7 @@ const { selectAll, selectIds } = todosAdapter.getSelectors<AppState>(
 
 export const selectForFriend = (friendId: number) =>
   createSelector(selectAll, (todos) =>
-    todos.filter((t) => t.userId === friendId),
+    todos.filter((t) => t.userId === friendId && !t.completed),
   );
 
 export { selectIds };

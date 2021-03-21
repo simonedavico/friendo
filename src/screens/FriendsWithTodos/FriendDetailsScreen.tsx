@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/stack';
 import * as React from 'react';
 import { FlatList, Linking, StyleSheet, Text, View } from 'react-native';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import AddTodoModal from '../../components/AddTodoModal';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
@@ -19,6 +20,7 @@ import {
 import { Todo } from '../../features/todos/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FriendsWithTodosStackParamList } from './types';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type FriendDetailsScreenNavigationProp = StackNavigationProp<
   FriendsWithTodosStackParamList,
@@ -46,19 +48,32 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
   onDelete,
   onComplete,
 }) => {
+  const { showActionSheetWithOptions } = useActionSheet();
   return (
-    <View style={styles.todosListItem}>
+    <TouchableOpacity
+      onPress={() => {
+        showActionSheetWithOptions(
+          {
+            options: [`Mark as done (${todo.id})`, 'Delete', 'Cancel'],
+            destructiveButtonIndex: 1,
+            cancelButtonIndex: 2,
+          },
+          (buttonIndex) => {
+            if (buttonIndex === 0) {
+              onComplete(todo);
+            }
+            if (buttonIndex === 1) {
+              onDelete(todo);
+            }
+          },
+        );
+      }}
+      style={styles.todosListItem}>
       <View style={styles.todoTitle}>
         <Text>{todo.title}</Text>
         <Text>{todo.completed ? 'Done' : 'Todo'}</Text>
       </View>
-      <Button onPress={() => onComplete(todo)}>
-        <Text>Done</Text>
-      </Button>
-      <Button onPress={() => onDelete(todo)}>
-        <Text>Delete</Text>
-      </Button>
-    </View>
+    </TouchableOpacity>
   );
 };
 
