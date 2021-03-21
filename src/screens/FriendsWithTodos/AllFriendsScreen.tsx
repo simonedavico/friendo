@@ -1,27 +1,16 @@
-import * as React from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import * as React from 'react';
+import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import FriendListItem from '../../components/FriendListItem';
+import Title from '../../components/Title';
+import { spacing } from '../../design';
 import { selectFriends } from '../../features/friends/store/selectors';
 import { fetchFriendsThunk } from '../../features/friends/store/thunks';
-import { Friend, FriendWithDistance } from '../../features/friends/types';
+import { Friend } from '../../features/friends/types';
 import { geolocationThunk } from '../../features/geolocation/store/thunks';
 import { fetchTodosThunk } from '../../features/todos/store/thunks';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import Title from '../../components/Title';
-import { spacing } from '../../design';
-import intl from '../../intl';
 import { FriendsWithTodosStackParamList } from './types';
-
-interface FriendListItemProps {
-  friend: FriendWithDistance;
-  onPress: (friend: Friend) => void;
-}
 
 type AllFriendsScreenNavigationProps = StackNavigationProp<
   FriendsWithTodosStackParamList,
@@ -31,22 +20,6 @@ type AllFriendsScreenNavigationProps = StackNavigationProp<
 interface AllFriendsScreenProps {
   navigation: AllFriendsScreenNavigationProps;
 }
-
-const FriendListItem: React.FC<FriendListItemProps> = ({ friend, onPress }) => {
-  return (
-    <TouchableOpacity
-      style={styles.friendListItem}
-      onPress={() => onPress(friend)}>
-      <Text>{friend.name}</Text>
-      {friend.distanceInKm !== undefined ? (
-        <Text>
-          is {intl.formatNumber(friend.distanceInKm, { unit: 'kilometers' })}{' '}
-          away
-        </Text>
-      ) : null}
-    </TouchableOpacity>
-  );
-};
 
 const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   const dispatch = useAppDispatch();
@@ -92,11 +65,6 @@ const styles = StyleSheet.create({
   header: {
     paddingVertical: spacing.s3,
     paddingHorizontal: spacing.s2,
-  },
-  friendListItem: {
-    paddingHorizontal: spacing.s2,
-    paddingVertical: spacing.s5,
-    borderBottomWidth: 1,
   },
 });
 
