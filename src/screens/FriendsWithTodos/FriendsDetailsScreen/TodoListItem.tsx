@@ -2,8 +2,8 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import * as React from 'react';
 import { StyleSheet, ViewProps } from 'react-native';
 import { Avatar, List } from 'react-native-paper';
-import { spacing } from '../design/variables';
-import { Todo } from '../features/todos/types';
+import { spacing } from '../../../design/variables';
+import { Todo } from '../../../features/todos/types';
 
 interface TodoListItemProps {
   todo: Todo;
@@ -34,7 +34,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
       onPress={() => {
         showActionSheetWithOptions(
           {
-            options: [`Mark as done (${todo.id})`, 'Delete', 'Cancel'],
+            options: ['Mark as done', 'Delete', 'Cancel'],
             destructiveButtonIndex: 1,
             cancelButtonIndex: 2,
           },

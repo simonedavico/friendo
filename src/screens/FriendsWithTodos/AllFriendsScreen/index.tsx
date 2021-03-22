@@ -4,17 +4,17 @@ import {
 } from '@react-navigation/stack';
 import * as React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
-import FriendListItem from '../../components/FriendListItem';
-import { AppList } from '../../design/AppList';
-import ListTitle from '../../design/ListTitle';
-import { spacing } from '../../design/variables';
-import { selectFriends } from '../../features/friends/store/selectors';
-import { fetchFriendsThunk } from '../../features/friends/store/thunks';
-import { Friend } from '../../features/friends/types';
-import { geolocationThunk } from '../../features/geolocation/store/thunks';
-import { fetchTodosThunk } from '../../features/todos/store/thunks';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { FriendsWithTodosStackParamList } from './types';
+import FriendListItem from './FriendListItem';
+import { AppList } from '../../../design/AppList';
+import ListTitle from '../../../design/ListTitle';
+import { spacing } from '../../../design/variables';
+import { selectFriends } from '../../../features/friends/store/selectors';
+import { fetchFriendsThunk } from '../../../features/friends/store/thunks';
+import { Friend } from '../../../features/friends/types';
+import { geolocationThunk } from '../../../features/geolocation/store/thunks';
+import { fetchTodosThunk } from '../../../features/todos/store/thunks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { FriendsWithTodosStackParamList } from '../types';
 
 type AllFriendsScreenNavigationProps = StackNavigationProp<
   FriendsWithTodosStackParamList,

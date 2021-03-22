@@ -6,9 +6,9 @@ import {
 } from '@react-navigation/stack';
 import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AddTodoModal from '../../../components/AddTodoModal';
+import AddTodoModal from './AddTodoModal';
 import { AppList } from '../../../design/AppList';
-import TodoListItem from '../../../components/TodoListItem';
+import TodoListItem from './TodoListItem';
 import { selectById } from '../../../features/friends/store/selectors';
 import { selectForFriend } from '../../../features/todos/store/selectors';
 import {

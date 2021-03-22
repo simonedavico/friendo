@@ -2,10 +2,10 @@ import * as React from 'react';
 import { StyleSheet, Text, ViewStyle } from 'react-native';
 import { createOpenLink } from 'react-native-open-maps';
 import { Button, List } from 'react-native-paper';
-import Avatar from '../design/Avatar';
-import { radius, spacing } from '../design/variables';
-import { FriendWithDistance } from '../features/friends/types';
-import intl from '../intl';
+import Avatar from '../../../design/Avatar';
+import { radius, spacing } from '../../../design/variables';
+import { FriendWithDistance } from '../../../features/friends/types';
+import intl from '../../../intl';
 
 interface FriendListItemProps {
   friend: FriendWithDistance;
@@ -29,7 +29,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
           ? `${intl.formatNumber(friend.distanceInKm, {
               unit: 'kilometers',
             })} km away`
-          : ''
+          : undefined
       }
       left={({ style }) => (
         <Avatar
