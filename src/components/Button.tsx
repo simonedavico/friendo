@@ -7,7 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { radius, spacing, typography } from '../design';
+import { radius, spacing, typography } from '../design/variables';
 
 type ButtonProps = TouchableOpacityProps;
 

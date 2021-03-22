@@ -4,10 +4,10 @@ import {
 } from '@react-navigation/stack';
 import * as React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
-import { AppList } from '../../components/AppList';
 import FriendListItem from '../../components/FriendListItem';
-import ListTitle from '../../components/ListTitle';
-import { spacing } from '../../design';
+import { AppList } from '../../design/AppList';
+import ListTitle from '../../design/ListTitle';
+import { spacing } from '../../design/variables';
 import { selectFriends } from '../../features/friends/store/selectors';
 import { fetchFriendsThunk } from '../../features/friends/store/thunks';
 import { Friend } from '../../features/friends/types';

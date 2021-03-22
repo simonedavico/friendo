@@ -2,7 +2,7 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import * as React from 'react';
 import { StyleSheet, ViewProps } from 'react-native';
 import { Avatar, List } from 'react-native-paper';
-import { spacing } from '../design';
+import { spacing } from '../design/variables';
 import { Todo } from '../features/todos/types';
 
 interface TodoListItemProps {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, ViewStyle } from 'react-native';
 import { createOpenLink } from 'react-native-open-maps';
 import { Avatar, Button, List } from 'react-native-paper';
-import { radius, spacing } from '../design';
+import { radius, spacing } from '../design/variables';
 import { FriendWithDistance } from '../features/friends/types';
 import intl from '../intl';
 
@@ -37,7 +37,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
       }
       left={({ style }) => (
         <Avatar.Text
-          style={[style, styles.item, { marginLeft: spacing.s2 }]}
+          style={[style, styles.item, styles.avatar]}
           size={spacing.s8}
           label={initials(friend.name)}
         />
@@ -59,6 +59,9 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 };
 
 const styles = StyleSheet.create({
+  avatar: {
+    marginLeft: spacing.s2,
+  },
   container: {
     paddingHorizontal: spacing.s3,
   },

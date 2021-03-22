@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextProps, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import { Title } from 'react-native-paper';
-import { typography } from '../design';
+import { typography } from './variables';
 
 type ListTitleProps = TextProps;
 

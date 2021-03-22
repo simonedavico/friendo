@@ -15,6 +15,14 @@ import { Provider } from 'react-redux';
 import FriendsWithTodos from './screens/FriendsWithTodos';
 import store from './store';
 
+declare global {
+  namespace ReactNativePaper {
+    interface ThemeColors {
+      label: string;
+    }
+  }
+}
+
 const CombinedDefaultTheme = {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
@@ -23,6 +31,7 @@ const CombinedDefaultTheme = {
     ...NavigationDefaultTheme.colors,
     background: '#f3f4f5',
     surface: 'white',
+    label: '#8e949a',
   },
 };
 const CombinedDarkTheme = {
@@ -31,6 +40,7 @@ const CombinedDarkTheme = {
   colors: {
     ...PaperDarkTheme.colors,
     ...NavigationDarkTheme.colors,
+    label: '#8e949a',
   },
 };
 

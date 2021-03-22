@@ -2,9 +2,9 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
-import { radius, spacing } from '../design';
+import { radius, spacing } from '../design/variables';
 import Button from './Button';
-import ListTitle from './ListTitle';
+import ListTitle from '../design/ListTitle';
 
 interface AddTodoModalProps {
   isVisible: boolean;

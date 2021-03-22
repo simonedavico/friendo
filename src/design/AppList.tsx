@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlatList, FlatListProps, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { radius, spacing } from '../design';
+import { radius, spacing } from './variables';
 
 type AppListProps<T> = FlatListProps<T>;
 

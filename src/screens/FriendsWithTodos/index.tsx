@@ -5,7 +5,7 @@ import AllFriendsScreen, {
 } from './AllFriendsScreen';
 import FriendDetailsScreen, {
   navigationOptions as todosNavOptions,
-} from './FriendDetailsScreen';
+} from './FriendsDetailsScreen';
 import { FriendsWithTodosStackParamList } from './types';
 import { useTheme } from 'react-native-paper';
 
