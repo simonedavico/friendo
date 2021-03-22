@@ -24,7 +24,7 @@ const Title: React.FC<TitleProps> = ({ children, style, ...props }) => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: typography.text50,
+    fontSize: typography.text30,
     fontWeight: 'bold',
   },
 });

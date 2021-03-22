@@ -21,6 +21,16 @@ interface AllFriendsScreenProps {
   navigation: AllFriendsScreenNavigationProps;
 }
 
+const computeRounded = (index: number, length: number) => {
+  if (index === 0) {
+    return 'top';
+  }
+  if (index === length - 1) {
+    return 'bottom';
+  }
+  return undefined;
+};
+
 const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const isLoadingFriends = useAppSelector((state) => state.friends.loading);
@@ -50,8 +60,12 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
       data={Object.values(friends)}
       keyExtractor={(friend) => `${friend!.id}`}
       initialNumToRender={20}
-      renderItem={({ item }) => (
-        <FriendListItem friend={item!} onPress={onFriendPress} />
+      renderItem={({ item, index }) => (
+        <FriendListItem
+          rounded={computeRounded(index, Object.values(friends).length)}
+          friend={item!}
+          onPress={onFriendPress}
+        />
       )}
     />
   );
@@ -63,8 +77,8 @@ export const navigationOptions = {
 
 const styles = StyleSheet.create({
   header: {
-    paddingVertical: spacing.s3,
-    paddingHorizontal: spacing.s2,
+    marginVertical: spacing.s6,
+    paddingHorizontal: spacing.s3,
   },
 });
 
