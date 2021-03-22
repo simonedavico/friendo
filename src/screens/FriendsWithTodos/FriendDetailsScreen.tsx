@@ -4,11 +4,13 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import * as React from 'react';
-import { FlatList, Linking, StyleSheet, Text, View } from 'react-native';
-import { useActionSheet } from '@expo/react-native-action-sheet';
+import { Linking, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AddTodoModal from '../../components/AddTodoModal';
+import { AppList } from '../../components/AppList';
 import Button from '../../components/Button';
-import Title from '../../components/Title';
+import ListTitle from '../../components/ListTitle';
+import TodoListItem from '../../components/TodoListItem';
 import { spacing } from '../../design';
 import { selectById } from '../../features/friends/store/selectors';
 import { selectForFriend } from '../../features/todos/store/selectors';
@@ -20,7 +22,6 @@ import {
 import { Todo } from '../../features/todos/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FriendsWithTodosStackParamList } from './types';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type FriendDetailsScreenNavigationProp = StackNavigationProp<
   FriendsWithTodosStackParamList,
@@ -37,47 +38,8 @@ interface FriendDetailsScreen {
   route: FriendDetailsScreenRouteProp;
 }
 
-interface TodoListItemProps {
-  todo: Todo;
-  onDelete: (todo: Todo) => void;
-  onComplete: (todo: Todo) => void;
-}
-
-const TodoListItem: React.FC<TodoListItemProps> = ({
-  todo,
-  onDelete,
-  onComplete,
-}) => {
-  const { showActionSheetWithOptions } = useActionSheet();
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        showActionSheetWithOptions(
-          {
-            options: [`Mark as done (${todo.id})`, 'Delete', 'Cancel'],
-            destructiveButtonIndex: 1,
-            cancelButtonIndex: 2,
-          },
-          (buttonIndex) => {
-            if (buttonIndex === 0) {
-              onComplete(todo);
-            }
-            if (buttonIndex === 1) {
-              onDelete(todo);
-            }
-          },
-        );
-      }}
-      style={styles.todosListItem}>
-      <View style={styles.todoTitle}>
-        <Text>{todo.title}</Text>
-        <Text>{todo.completed ? 'Done' : 'Todo'}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
 const FriendDetailsScreen: React.FC<FriendDetailsScreen> = ({ route }) => {
+  const { bottom } = useSafeAreaInsets();
   const friendId = route.params.friendId;
   const friend = useAppSelector((state) => selectById(state, friendId));
   const todos = useAppSelector(selectForFriend(friendId));
@@ -103,10 +65,11 @@ const FriendDetailsScreen: React.FC<FriendDetailsScreen> = ({ route }) => {
 
   return (
     <>
-      <FlatList
+      <AppList
+        ListFooterComponent={() => <View style={{ height: bottom }} />}
         ListHeaderComponent={() => (
-          <View>
-            <Title style={styles.header}>{friend.name}</Title>
+          <View style={styles.header}>
+            <ListTitle>{friend.name}</ListTitle>
             <Text style={{ paddingHorizontal: spacing.s2 }}>
               {friend.address.city}, {friend.address.street}
             </Text>
@@ -163,21 +126,14 @@ const styles = StyleSheet.create({
     marginRight: spacing.s2,
   },
   header: {
-    paddingVertical: spacing.s3,
-    paddingHorizontal: spacing.s2,
+    marginBottom: spacing.s6,
+    marginTop: spacing.s3,
+    paddingHorizontal: spacing.s3,
   },
   headerButtons: {
     flexDirection: 'row',
     margin: spacing.s2,
   },
-  todosListItem: {
-    alignItems: 'center',
-    paddingHorizontal: spacing.s2,
-    paddingVertical: spacing.s5,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-  },
-  todoTitle: { flex: 1 },
 });
 
 export default FriendDetailsScreen;

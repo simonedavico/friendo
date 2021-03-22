@@ -3,9 +3,10 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import * as React from 'react';
-import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import { AppList } from '../../components/AppList';
 import FriendListItem from '../../components/FriendListItem';
-import Title from '../../components/Title';
+import ListTitle from '../../components/ListTitle';
 import { spacing } from '../../design';
 import { selectFriends } from '../../features/friends/store/selectors';
 import { fetchFriendsThunk } from '../../features/friends/store/thunks';
@@ -23,16 +24,6 @@ type AllFriendsScreenNavigationProps = StackNavigationProp<
 interface AllFriendsScreenProps {
   navigation: AllFriendsScreenNavigationProps;
 }
-
-const computeRounded = (index: number, length: number) => {
-  if (index === 0) {
-    return 'top';
-  }
-  if (index === length - 1) {
-    return 'bottom';
-  }
-  return undefined;
-};
 
 const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   const dispatch = useAppDispatch();
@@ -58,17 +49,15 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   return isLoadingFriends || isLoadingGeolocation ? (
     <ActivityIndicator animating />
   ) : (
-    <FlatList
-      ListHeaderComponent={() => <Title style={styles.header}>Friends</Title>}
+    <AppList
+      ListHeaderComponent={() => (
+        <ListTitle style={styles.header}>Friends</ListTitle>
+      )}
       data={Object.values(friends)}
       keyExtractor={(friend) => `${friend!.id}`}
       initialNumToRender={20}
-      renderItem={({ item, index }) => (
-        <FriendListItem
-          rounded={computeRounded(index, Object.values(friends).length)}
-          friend={item!}
-          onPress={onFriendPress}
-        />
+      renderItem={({ item }) => (
+        <FriendListItem friend={item!} onPress={onFriendPress} />
       )}
     />
   );
@@ -82,6 +71,7 @@ export const navigationOptions: StackNavigationOptions = {
 const styles = StyleSheet.create({
   header: {
     marginBottom: spacing.s6,
+    marginTop: spacing.s3,
     paddingHorizontal: spacing.s3,
   },
 });

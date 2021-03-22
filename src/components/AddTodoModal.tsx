@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import { radius, spacing } from '../design';
 import Button from './Button';
-import Title from './Title';
+import ListTitle from './ListTitle';
 
 interface AddTodoModalProps {
   isVisible: boolean;
@@ -39,7 +39,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({
       backdropTransitionOutTiming={animationDuration}
       backdropTransitionInTiming={animationDuration}>
       <View style={styles.modal}>
-        <Title style={styles.title}>Add new todo</Title>
+        <ListTitle style={styles.title}>Add new todo</ListTitle>
         <TextInput
           ref={textInputRef}
           value={newTodo}
