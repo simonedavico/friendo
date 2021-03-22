@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   listTitle: {
     marginLeft: spacing.s3,
     alignSelf: 'flex-end',
+    flex: 1,
   },
   location: {
     flexDirection: 'row',

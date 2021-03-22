@@ -18,7 +18,7 @@ interface AddTodoModalProps {
   onSave: (todo: string) => Promise<unknown>;
 }
 
-const animationDuration = 500;
+const animationDuration = 300;
 
 const AddTodoModal: React.FC<AddTodoModalProps> = ({
   isVisible,
