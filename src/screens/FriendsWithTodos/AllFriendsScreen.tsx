@@ -1,4 +1,7 @@
-import { StackNavigationProp } from '@react-navigation/stack';
+import {
+  StackNavigationOptions,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 import * as React from 'react';
 import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import FriendListItem from '../../components/FriendListItem';
@@ -71,13 +74,14 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   );
 };
 
-export const navigationOptions = {
+export const navigationOptions: StackNavigationOptions = {
   title: 'Friends',
+  headerTitle: () => null,
 };
 
 const styles = StyleSheet.create({
   header: {
-    marginVertical: spacing.s6,
+    marginBottom: spacing.s6,
     paddingHorizontal: spacing.s3,
   },
 });

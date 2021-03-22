@@ -7,12 +7,27 @@ import FriendDetailsScreen, {
   navigationOptions as todosNavOptions,
 } from './FriendDetailsScreen';
 import { FriendsWithTodosStackParamList } from './types';
+import { useTheme } from 'react-native-paper';
 
 const Stack = createStackNavigator<FriendsWithTodosStackParamList>();
 
 const FriendsWithTodos: React.FC = () => {
+  const theme = useTheme();
+  const screenOptions = React.useMemo(
+    () => ({
+      headerStyle: {
+        backgroundColor: theme.colors.background,
+        borderBottomWidth: 0,
+        shadowColor: 'transparent',
+      },
+    }),
+    [theme],
+  );
+
   return (
-    <Stack.Navigator initialRouteName="AllFriends">
+    <Stack.Navigator
+      screenOptions={screenOptions}
+      initialRouteName="AllFriends">
       <Stack.Screen
         name="AllFriends"
         options={friendsNavOptions}
