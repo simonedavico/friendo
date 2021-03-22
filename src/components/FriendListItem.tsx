@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, ViewStyle } from 'react-native';
 import { createOpenLink } from 'react-native-open-maps';
-import { Avatar, Button, List } from 'react-native-paper';
+import { Button, List } from 'react-native-paper';
+import Avatar from '../design/Avatar';
 import { radius, spacing } from '../design/variables';
 import { FriendWithDistance } from '../features/friends/types';
 import intl from '../intl';
@@ -11,11 +12,6 @@ interface FriendListItemProps {
   style?: ViewStyle;
   onPress: (friend: FriendWithDistance) => void;
 }
-
-const initials = (fullName: string): string => {
-  const [name, surname] = fullName.split(' ');
-  return name[0].toUpperCase() + surname[0].toUpperCase();
-};
 
 const FriendListItem: React.FC<FriendListItemProps> = ({
   friend,
@@ -36,10 +32,10 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
           : ''
       }
       left={({ style }) => (
-        <Avatar.Text
-          style={[style, styles.item, styles.avatar]}
+        <Avatar
           size={spacing.s8}
-          label={initials(friend.name)}
+          style={[style, styles.item, styles.avatar]}
+          fullName={friend.name}
         />
       )}
       right={({ style }) => (

@@ -1,9 +1,16 @@
 import * as React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { createOpenLink } from 'react-native-open-maps';
-import { Avatar, Button, Card, Divider, Paragraph } from 'react-native-paper';
+import {
+  Avatar as RNPAvatar,
+  Button,
+  Card,
+  Divider,
+  Paragraph,
+} from 'react-native-paper';
 import ListTitle from '../../../design/ListTitle';
 import CardLabel from '../../../design/CardLabel';
+import Avatar from '../../../design/Avatar';
 import { spacing } from '../../../design/variables';
 import { Friend } from '../../../features/friends/types';
 
@@ -20,7 +27,7 @@ const FriendsDetailsHeader: React.FC<FriendsDetailsHeaderProps> = ({
     <View style={styles.headerContainer}>
       <View style={styles.header}>
         <View style={styles.avatarAndName}>
-          <Avatar.Text size={48} label="XD" />
+          <Avatar size={48} fullName={friend.name} />
           <ListTitle style={styles.listTitle}>{friend.name}</ListTitle>
         </View>
         <View style={styles.detailsCard}>
@@ -28,7 +35,7 @@ const FriendsDetailsHeader: React.FC<FriendsDetailsHeaderProps> = ({
           <Card elevation={0}>
             <Card.Content>
               <View style={styles.location}>
-                <Avatar.Icon size={24} icon="home" />
+                <RNPAvatar.Icon size={24} icon="home" />
                 <Paragraph style={styles.locationText}>
                   {friend.address.city}, {friend.address.street} (
                   {friend.address.zipcode})
@@ -38,10 +45,10 @@ const FriendsDetailsHeader: React.FC<FriendsDetailsHeaderProps> = ({
             </Card.Content>
             <Card.Actions>
               <Button
-                icon="phone"
                 onPress={() => {
                   Linking.openURL(`tel:${friend.phone}`);
                 }}
+                icon="phone"
                 style={styles.actionButton}>
                 Call
               </Button>
