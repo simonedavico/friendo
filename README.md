@@ -1,7 +1,9 @@
 ## Friendo
 
-A small React Native app that shows a list of friends and a list of todos for each friend.
+A small React Native app that shows a list of friends and a list of todos for each friend. 
 Written with TypeScript.
+
+If you want a preview of the app, you can take a look at the [screenshots](./screenshots).
 
 ### Setting up development environment
 
