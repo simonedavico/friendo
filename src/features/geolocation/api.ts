@@ -1,25 +1,24 @@
-import Geolocation from '@react-native-community/geolocation';
-import { GeolocationPositionError, GeolocationState } from './types';
+import RNLocation from 'react-native-location';
+import { GeolocationState } from './types';
 
-const codeToError: Record<number, GeolocationPositionError> = {
-  1: 'PERMISSION_DENIED',
-  2: 'POSITION_UNAVAILABLE',
-  3: 'TIMEOUT',
-};
-
+// return errors according to the web geolocation spec
+// see https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
 export const findUserLocation = (): Promise<GeolocationState> => {
-  return new Promise((resolve, reject) => {
-    Geolocation.getCurrentPosition(
-      (geoRes) => {
-        resolve({
-          lat: geoRes.coords.latitude,
-          lng: geoRes.coords.longitude,
-          status: 'OK',
-        });
-      },
-      (error) => {
-        reject({ error: codeToError[error.code] });
-      },
-    );
-  });
+  return RNLocation.requestPermission({ ios: 'whenInUse' })
+    .then((granted) => {
+      return granted
+        ? RNLocation.getLatestLocation()
+        : Promise.reject(Error('PERMISSION_DENIED'));
+    })
+    .then((location) => {
+      if (location === null) {
+        return Promise.reject(Error('TIMEOUT'));
+      }
+
+      return {
+        lat: location.latitude,
+        lng: location.longitude,
+        status: 'OK',
+      };
+    });
 };

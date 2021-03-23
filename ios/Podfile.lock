@@ -256,6 +256,8 @@ PODS:
     - React-Core
   - react-native-geolocation (2.0.2):
     - React
+  - react-native-location (2.5.0):
+    - React
   - react-native-safe-area-context (3.2.0):
     - React-Core
   - React-perflogger (0.64.0)
@@ -402,6 +404,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-location (from `../node_modules/react-native-location`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -472,6 +475,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-flipper"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
+  react-native-location:
+    :path: "../node_modules/react-native-location"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -540,6 +545,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 0ae35a37b20d5e031eb020a69cc5afdbd6406301
   react-native-flipper: 558237babdf0ee5d5360ebac860d3a5d1d9fc133
   react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
+  react-native-location: 9c53c0957756f7d70e8fdc76b1c7ed85867c8d0b
   react-native-safe-area-context: e471852c5ed67eea4b10c5d9d43c1cebae3b231d
   React-perflogger: 9c547d8f06b9bf00cb447f2b75e8d7f19b7e02af
   React-RCTActionSheet: 3080b6e12e0e1a5b313c8c0050699b5c794a1b11

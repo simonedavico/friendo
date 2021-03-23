@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GeolocationState } from '../types';
+import { GeolocationPositionError, GeolocationState } from '../types';
 import { geolocationThunk } from './thunks';
 
 const initialState = {
@@ -26,6 +26,10 @@ const geolocationSlice = createSlice<
           ...action.payload,
           loading: false,
         };
+      })
+      .addCase(geolocationThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.status = action.error.message as GeolocationPositionError;
       });
   },
 });
