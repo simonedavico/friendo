@@ -58,7 +58,7 @@ export const addTodoThunk = ({
   // immediately add the todo, with a temporary id
   dispatch(addTodoPending(tempTodo));
 
-  return addTodo({ id: tempId, friendId, todoText })
+  return addTodo({ friendId, todoText })
     .then((newTodo) => {
       // reconcile the temp todo with the proper id from the server
       dispatch(addTodoFulfilled({ newTodo, tempId }));
