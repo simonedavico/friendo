@@ -13,6 +13,13 @@ Follow [React Native's setup instructions](https://reactnative.dev/docs/environm
 
 - `npx react-native run-ios`: run the app in debug mode on iOS. Alternatively, you can run `npm run xcode` to open XCode and build/run the app from there
 
+## Debugging
+
+The app supports debugging via Flipper v0.81. You can download Flipper [here](https://github.com/facebook/flipper/releases/tag/v0.81.0). 
+Make sure to install the Redux Debugger plugin if you want to make the redux store debuggable as well.
+
+Flipper will automatically connect to the running app.
+
 ### Running tests
 
 Make sure to have `detox-cli` and `AppleSimUtils` installed (follow [Detox docs instructions](https://github.com/wix/Detox/blob/master/docs/Introduction.GettingStarted.md)).
