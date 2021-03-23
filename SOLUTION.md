@@ -86,5 +86,8 @@ Some limitations I am aware of:
 
 - The app was only tested on iOS; it probably runs fine on Android, but requires some setup (like adding the required permission for geolocation in the manifest file);
 - Some views do not handle corner cases: for example, lists do not handle the empty state (can occur if you delete all todos for a friend);
-- I have not fully tested the navigation and call features as they are not available on the iPhone Simulator.
+- I have not fully tested the navigation and call features as they are not available on the iPhone Simulator;
+- New todos are added to the bottom of the todos list (not the best UX), having more time I would track some creation/edit timestamp for each and sort them accordingly;
+- None of the REST API calls I implemented validates the expected response format; in a real life app I would probably use `zod` or `io-ts` to implement response parsing;
+- I have not put a lot of care into covering a11y concerns (admittedly I am also not an expert on a11y for mobile apps);
 - I have not implemented the bonus point about displaying the friends' positions on a map. I think all the other points should be covered.
