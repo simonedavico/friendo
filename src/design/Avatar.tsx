@@ -15,15 +15,8 @@ const initials = (fullName: string): string => {
   return name[0].toUpperCase() + surname[0].toUpperCase();
 };
 
-const Avatar: React.FC<AvatarProps> = ({ fullName, style, size, ...props }) => {
-  return (
-    <RNPAvatar.Text
-      {...props}
-      style={style}
-      size={size}
-      label={initials(fullName)}
-    />
-  );
+const Avatar: React.FC<AvatarProps> = ({ fullName, ...props }) => {
+  return <RNPAvatar.Text {...props} label={initials(fullName)} />;
 };
 
 export default Avatar;
