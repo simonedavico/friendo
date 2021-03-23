@@ -21,6 +21,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
   const { showActionSheetWithOptions } = useActionSheet();
   return (
     <List.Item
+      testID="todo-list-item"
       style={listItemStyle}
       title={todo.title}
       titleNumberOfLines={2}

@@ -51,6 +51,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({
           <Card.Content>
             <Title style={styles.title}>Add new todo</Title>
             <TextInput
+              testID="new-todo-text"
               mode="outlined"
               autoFocus
               maxLength={200}

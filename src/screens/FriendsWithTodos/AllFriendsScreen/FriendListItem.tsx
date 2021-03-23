@@ -21,6 +21,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
   const { geo } = friend.address;
   return (
     <List.Item
+      testID="friend-list-item"
       style={listItemStyle}
       onPress={() => onPress(friend)}
       title={friend.name}

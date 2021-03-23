@@ -5,7 +5,7 @@
     "ios": {
       "type": "ios.app",
       "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/friendo.app",
-      "build": "react-native run-ios"
+      "build": "xcodebuild -quiet -workspace ios/friendo.xcworkspace -scheme friendo -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build"
     }
   },
   "devices": {

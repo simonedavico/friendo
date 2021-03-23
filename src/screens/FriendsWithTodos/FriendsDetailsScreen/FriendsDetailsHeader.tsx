@@ -28,7 +28,9 @@ const FriendsDetailsHeader: React.FC<FriendsDetailsHeaderProps> = ({
       <View style={styles.header}>
         <View style={styles.avatarAndName}>
           <Avatar size={48} fullName={friend.name} />
-          <ListTitle style={styles.listTitle}>{friend.name}</ListTitle>
+          <ListTitle testID="friend-detail-name" style={styles.listTitle}>
+            {friend.name}
+          </ListTitle>
         </View>
         <View style={styles.detailsCard}>
           <CardLabel style={styles.cardLabel}>Contact Details</CardLabel>

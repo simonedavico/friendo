@@ -76,6 +76,7 @@ const FriendDetailsScreen: React.FC<FriendDetailsScreen> = ({ route }) => {
   return (
     <>
       <AppList
+        testID="todo-list"
         // avoid having the last list item covered by the bottom safe area inset
         ListFooterComponent={() => <View style={{ height: bottom }} />}
         ListHeaderComponent={() => (

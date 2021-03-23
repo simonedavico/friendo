@@ -51,7 +51,9 @@ const AllFriendsScreen: React.FC<AllFriendsScreenProps> = ({ navigation }) => {
   ) : (
     <AppList
       ListHeaderComponent={() => (
-        <ListTitle style={styles.header}>Friends</ListTitle>
+        <ListTitle testID="friend-list-title" style={styles.header}>
+          Friends
+        </ListTitle>
       )}
       data={Object.values(friends)}
       keyExtractor={(friend) => `${friend!.id}`}

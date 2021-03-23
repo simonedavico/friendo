@@ -3,15 +3,22 @@ import { TextProps, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import { Title } from 'react-native-paper';
 import { typography } from './variables';
 
-type ListTitleProps = TextProps;
+interface ListTitleProps extends TextProps {
+  testID?: string;
+}
 
-const ListTitle: React.FC<ListTitleProps> = ({ children, style, ...props }) => {
+const ListTitle: React.FC<ListTitleProps> = ({
+  children,
+  style,
+  testID,
+  ...props
+}) => {
   const titleStyles = StyleSheet.compose(
     styles.title as StyleProp<TextStyle>,
     style,
   );
   return (
-    <Title {...props} style={titleStyles}>
+    <Title testID={testID} {...props} style={titleStyles}>
       {children}
     </Title>
   );
