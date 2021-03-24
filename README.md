@@ -9,6 +9,9 @@ If you want a preview of the app, you can take a look at the [screenshots](./scr
 
 Follow [React Native's setup instructions](https://reactnative.dev/docs/environment-setup).
 
+- Install project dependencies: `npm i`
+- Install Pods: `npx pod-install ios`
+
 ### Run the project
 
 - `npx react-native run-ios`: run the app in debug mode on iOS. Alternatively, you can run `npm run xcode` to open XCode and build/run the app from there
